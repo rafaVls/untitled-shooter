@@ -5,16 +5,17 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public float speed;
-    Transform playerPos;
+    Transform player;
 
     void Start() 
     {
-        playerPos = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
     }
 
     void Update() 
     {
-        transform.position = Vector2.MoveTowards(transform.position, playerPos.position, speed * Time.deltaTime);
+        Vector3 playerPos = player.position;
+        transform.position = Vector2.MoveTowards(transform.position, playerPos, speed * Time.deltaTime);
     }
 
 
