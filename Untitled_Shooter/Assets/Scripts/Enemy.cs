@@ -5,7 +5,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public float speed;
-    private Transform playerPos;
+    Transform playerPos;
 
     void Start() 
     {
