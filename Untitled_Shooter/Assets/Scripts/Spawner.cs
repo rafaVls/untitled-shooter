@@ -5,12 +5,13 @@ using UnityEngine;
 public class Spawner : MonoBehaviour
 {
     public GameObject enemy;
-    public Transform[] spawnSpots;
     public float timeBetweenSpawns;
     public float startTimeBetweenSpawns;
+    Transform[] spawnSpots;
 
     void Start() 
     {
+        spawnSpots = GetComponentsInChildren<Transform>();
         timeBetweenSpawns = startTimeBetweenSpawns;
     }
 
@@ -27,5 +28,4 @@ public class Spawner : MonoBehaviour
             timeBetweenSpawns -= Time.deltaTime;
         }
     }
-
 }
