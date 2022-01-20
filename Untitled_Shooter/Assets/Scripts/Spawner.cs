@@ -23,9 +23,9 @@ public class Spawner : MonoBehaviour
             timeBetweenSpawns = startTimeBetweenSpawns;
         }
         else 
-            {
-                timeBetweenSpawns -= Time.deltaTime;
-            }
+        {
+            timeBetweenSpawns -= Time.deltaTime;
+        }
     }
 
 }
