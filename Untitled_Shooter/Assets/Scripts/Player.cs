@@ -5,7 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public float speed;
-    public Rigidbody2D rb;
+    Rigidbody2D rb;
     Vector2 moveVelocity;
 
     // Start is called before the first frame update
@@ -17,7 +17,10 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector2 moveInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        float x = Input.GetAxisRaw("Horizontal");
+        float y = Input.GetAxisRaw("Vertical");
+        Vector2 moveInput = new Vector2(x, y);
+        
         moveVelocity = moveInput.normalized * speed;
     }
 
