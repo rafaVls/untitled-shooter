@@ -305,15 +305,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 2031447390079119857, guid: eee9d3df2a0508b48bf17928ae8ff0d2, type: 3}
-  spawnSpots:
-  - {fileID: 1740935462}
-  - {fileID: 554109205}
-  - {fileID: 1698472705}
-  - {fileID: 138040400}
-  - {fileID: 743266569}
-  - {fileID: 1614055787}
-  - {fileID: 1153775062}
-  - {fileID: 1540354966}
   timeBetweenSpawns: 2.5
   startTimeBetweenSpawns: 1
 --- !u!1 &554109204
@@ -499,7 +490,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 6
-  rb: {fileID: 1032202687}
 --- !u!1 &1153775061
 GameObject:
   m_ObjectHideFlags: 0
