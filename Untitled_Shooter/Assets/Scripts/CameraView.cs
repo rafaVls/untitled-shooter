@@ -9,6 +9,9 @@ public class CameraView : MonoBehaviour
 
     void LateUpdate()
     {
-        transform.position = followThis.transform.position + distanceFromPlayer;    
+        if (followThis)
+        {
+            transform.position = followThis.transform.position + distanceFromPlayer;    
+        }
     }
 }

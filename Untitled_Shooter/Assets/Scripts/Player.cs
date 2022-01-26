@@ -5,6 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public float speed;
+    public int health = 10;
     Rigidbody2D rb;
     Animator animator;
     SpriteRenderer sr;
