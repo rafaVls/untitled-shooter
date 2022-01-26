@@ -5,19 +5,40 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public float speed;
-    Transform player;
+    GameObject playerRef;
+    Player playerInstance;
+    Transform playerTransform;
 
     void Start() 
     {
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        playerRef = GameObject.FindWithTag("Player");
+        playerInstance = playerRef?.GetComponent<Player>();
+        playerTransform = playerRef?.GetComponent<Transform>();
     }
 
     void Update() 
     {
-        Vector3 playerPos = player.position;
-        transform.position = Vector2.MoveTowards(transform.position, playerPos, speed * Time.deltaTime);
+        if (playerTransform)
+        {
+            Vector3 playerPos = playerTransform.position;
+            transform.position = Vector2.MoveTowards(transform.position, playerPos, speed * Time.deltaTime);
+        }
     }
 
-
-
+    void OnTriggerEnter2D(Collider2D other) {
+        if (other.CompareTag("Player"))
+        {
+            playerInstance.health--;
+            Destroy(gameObject);
+            if (playerInstance.health == 0) 
+            {
+                Destroy(other.gameObject);
+            }
+        }
+        else if (other.CompareTag("Bullet"))
+        {
+            Destroy(other.gameObject); // this belongs in bullet.cs I think
+            Destroy(gameObject);
+        }
+    }
 }
