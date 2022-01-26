@@ -8,6 +8,7 @@ public class Enemy : MonoBehaviour
     GameObject playerRef;
     Player playerInstance;
     Transform playerTransform;
+    public int health = 2;
 
     void Start() 
     {
@@ -22,10 +23,22 @@ public class Enemy : MonoBehaviour
         {
             Vector3 playerPos = playerTransform.position;
             transform.position = Vector2.MoveTowards(transform.position, playerPos, speed * Time.deltaTime);
+        
+            if (health <= 0)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 
-    void OnTriggerEnter2D(Collider2D other) {
+    public void TakeDamage(int meleeDamage)
+    {
+        health -= meleeDamage;
+        Debug.Log("damage taken");
+    }
+
+    void OnTriggerEnter2D(Collider2D other) 
+    {
         if (other.CompareTag("Player"))
         {
             playerInstance.health--;
