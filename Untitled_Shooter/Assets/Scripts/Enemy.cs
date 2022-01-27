@@ -34,7 +34,6 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(int meleeDamage)
     {
         health -= meleeDamage;
-        Debug.Log("damage taken");
     }
 
     void OnTriggerEnter2D(Collider2D other) 
