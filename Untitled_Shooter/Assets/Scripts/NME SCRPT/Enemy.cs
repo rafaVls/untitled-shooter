@@ -5,10 +5,11 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public float speed;
+    public int health = 2;
+
     GameObject playerRef;
     Player playerInstance;
     Transform playerTransform;
-    public int health = 2;
 
     void Start() 
     {
