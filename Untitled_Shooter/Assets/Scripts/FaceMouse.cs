@@ -15,5 +15,10 @@ public class FaceMouse : MonoBehaviour
         // Getting the x axis and actually rotating the object
         Vector3 xAxis = Vector3.forward;
         transform.rotation = Quaternion.AngleAxis(angle, xAxis);
+
+        if (PauseMenu.GameIsPaused)
+        {
+            //Get this script to be disabled while GameIsPaused = true
+        }
     }
 }
