@@ -20,21 +20,16 @@ public class Enemy : MonoBehaviour
 
     void Update() 
     {
-        if (playerTransform)
-        {
-            Vector3 playerPos = playerTransform.position;
-            transform.position = Vector2.MoveTowards(transform.position, playerPos, speed * Time.deltaTime);
-        
-            if (health <= 0)
-            {
-                Destroy(gameObject);
-            }
-        }
+        if (!playerTransform) return;
+        if (health <= 0) Destroy(gameObject);
+
+        Vector3 playerPos = playerTransform.position;
+        transform.position = Vector2.MoveTowards(transform.position, playerPos, speed * Time.deltaTime);
     }
 
-    public void TakeDamage(int meleeDamage)
+    public void TakeDamage(int damage)
     {
-        health -= meleeDamage;
+        health -= damage;
     }
 
     void OnTriggerEnter2D(Collider2D other) 
@@ -43,12 +38,14 @@ public class Enemy : MonoBehaviour
         {
             playerInstance.health--;
             Destroy(gameObject);
+            
             if (playerInstance.health == 0) 
             {
                 Destroy(other.gameObject);
             }
         }
-        else if (other.CompareTag("Bullet"))
+
+        if (other.CompareTag("Bullet"))
         {
             Destroy(other.gameObject); // this belongs in bullet.cs I think
             Destroy(gameObject);
