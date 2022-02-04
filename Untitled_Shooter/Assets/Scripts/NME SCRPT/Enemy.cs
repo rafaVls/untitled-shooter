@@ -51,7 +51,7 @@ public class Enemy : MonoBehaviour
             playerInstance.health--;
             Destroy(gameObject);
 
-            if (playerInstance.health == 0) Destroy(other.gameObject);
+            if (playerInstance.health <= 0) Destroy(other.gameObject);
         }
 
         if (other.CompareTag("Bullet"))
