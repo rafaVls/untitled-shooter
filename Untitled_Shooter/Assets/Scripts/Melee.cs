@@ -34,13 +34,12 @@ public class Melee : MonoBehaviour
         {
             timeBetweenMelee -= Time.deltaTime;
         }
-
-        
     }
 
-    void OnDrawGizmosSelected() {
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(meleePos.position, meleeRange);
+    //void OnDrawGizmosSelected() 
+    //{
+        //Gizmos.color = Color.green;
+        //Gizmos.DrawWireSphere(meleePos.position, meleeRange);
         //Gizmo not appearing, sad. Radius working though
-    }
+    //}
 }
