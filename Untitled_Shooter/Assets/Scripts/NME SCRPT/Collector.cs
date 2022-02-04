@@ -11,31 +11,39 @@ public class Collector : Enemy
     public float startTimeBetweenAttack;
 
     public GameObject limb;
-    public Transform player;
+
+    public Collector()
+    {
+        spawnChance = 0.15f;
+        health = 2;
+        speed = 4f;
+    }
 
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
         timeBetweenAttack = startTimeBetweenAttack;
     }
 
     void Update()
     {
+        Vector3 playerPos = playerTransform.position;
+
         // 3 different checks to act on player position
-        if (Vector2.Distance(transform.position, player.position) > stoppingDistance)
+        // gotta clean these up later
+        if (Vector2.Distance(transform.position, playerPos) > stoppingDistance)
         {
             //Get closer to player
-            transform.position = Vector2.MoveTowards(transform.position, player.position, speed * Time.deltaTime);
+            transform.position = Vector2.MoveTowards(transform.position, playerPos, speed * Time.deltaTime);
         }
-        else if (Vector2.Distance(transform.position, player.position) < stoppingDistance && Vector2.Distance(transform.position, player.position) > retreatDistance)
+        else if (Vector2.Distance(transform.position, playerPos) < stoppingDistance && Vector2.Distance(transform.position, playerPos) > retreatDistance)
         {
             //No movement
             transform.position = this.transform.position;
         }
-        else if (Vector2.Distance(transform.position, player.position) < retreatDistance)
+        else if (Vector2.Distance(transform.position, playerPos) < retreatDistance)
         {
             //retreat from player
-            transform.position = Vector2.MoveTowards(transform.position, player.position, -speed * Time.deltaTime);
+            transform.position = Vector2.MoveTowards(transform.position, playerPos, -speed * Time.deltaTime);
         }
 
         if (timeBetweenAttack <= 0)
