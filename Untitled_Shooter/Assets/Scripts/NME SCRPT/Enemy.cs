@@ -4,18 +4,30 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public float speed;
-    public int health = 2;
+    // Enemy properties
+    public float spawnChance { get; set; }
+    public float speed { get; set; }
+    public int health { get; set; }
 
-    GameObject playerRef;
-    Player playerInstance;
-    Transform playerTransform;
-
-    void Start() 
+    // Player references
+    public GameObject playerRef
     {
-        playerRef = GameObject.FindWithTag("Player");
-        playerInstance = playerRef?.GetComponent<Player>();
-        playerTransform = playerRef?.GetComponent<Transform>();
+        get => GameObject.FindWithTag("Player");
+    }
+    public Player playerInstance
+    {
+        get => playerRef?.GetComponent<Player>();
+    }
+    public Transform playerTransform
+    {
+        get => playerRef?.GetComponent<Transform>();
+    }
+
+    public Enemy()
+    {
+        health = 2;
+        speed = 5f;
+        spawnChance = 0.45f;
     }
 
     void Update() 
@@ -38,11 +50,8 @@ public class Enemy : MonoBehaviour
         {
             playerInstance.health--;
             Destroy(gameObject);
-            
-            if (playerInstance.health == 0) 
-            {
-                Destroy(other.gameObject);
-            }
+
+            if (playerInstance.health == 0) Destroy(other.gameObject);
         }
 
         if (other.CompareTag("Bullet"))
