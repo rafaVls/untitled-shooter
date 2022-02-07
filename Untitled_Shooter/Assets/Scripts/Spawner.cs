@@ -46,7 +46,7 @@ public class Spawner : MonoBehaviour
         int randomIndex = Random.Range(0, enemies.Count);
 
         Instantiate(enemies[randomIndex], spawnSpots[randomPosition].position, Quaternion.identity);
-        enemies.Remove(enemies[randomIndex]);
+        enemies.RemoveAt(randomIndex);
         
         timeBetweenSpawns = startTimeBetweenSpawns;
     }
