@@ -53,17 +53,12 @@ public class Player : MonoBehaviour
         animator.SetFloat("Speed", Mathf.Abs(playerDir * speed));
     }
 
-    // investigate if this function can be simplified, I don't like if elses
-    // if elses are a part of the c# lifestyle baby
+    // I did it. Eat it chef >:)
     void FlipSprite(float horizontalDir)
     {
-        if (horizontalDir > 0) 
-        {
-            sr.flipX = false;
-        }
-        else if (horizontalDir < 0)
-        {
-            sr.flipX = true;
-        }
+        // if horizontalDir is 0, we don't want to do anything
+        // because the sprite is already looking where it's supposed to
+        if (horizontalDir == 0) return;
+        sr.flipX = horizontalDir > 0 ? false : true;
     }
 }
