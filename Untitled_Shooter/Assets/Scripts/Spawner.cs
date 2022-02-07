@@ -9,9 +9,9 @@ public class Spawner : MonoBehaviour
     public int numberOfEnemies = 10;
 
     public GameObject[] enemyTypes;
-    List<Transform> spawnSpots = new();
-    List<Enemy> enemyScripts = new();
-    List<GameObject> enemies = new();
+    private List<Transform> spawnSpots = new();
+    private List<Enemy> enemyScripts = new();
+    private List<GameObject> enemies = new();
 
     void Start() 
     {
@@ -41,14 +41,11 @@ public class Spawner : MonoBehaviour
             timeBetweenSpawns -= Time.deltaTime;
             return;
         }
+        timeBetweenSpawns = startTimeBetweenSpawns;
 
         int randomPosition = Random.Range(0, spawnSpots.Count - 1);
-        int randomIndex = Random.Range(0, enemies.Count);
-
-        Instantiate(enemies[randomIndex], spawnSpots[randomPosition].position, Quaternion.identity);
-        enemies.RemoveAt(randomIndex);
-        
-        timeBetweenSpawns = startTimeBetweenSpawns;
+        Vector3 spawnerPos = spawnSpots[randomPosition].position;
+        SpawnRandom(enemies, spawnerPos);
     }
     
     int CalculateSpawn(List<Enemy> enemyList)
@@ -70,5 +67,13 @@ public class Spawner : MonoBehaviour
             else randomPoint = sw;
         }
         return enemyTypes.Length - 1;
+    }
+
+    void SpawnRandom(List<GameObject> toSpawn, Vector3 spawnPos)
+    {
+        int randomIndex = Random.Range(0, toSpawn.Count);
+
+        Instantiate(toSpawn[randomIndex], spawnPos, Quaternion.identity);
+        toSpawn.RemoveAt(randomIndex);
     }
 }
