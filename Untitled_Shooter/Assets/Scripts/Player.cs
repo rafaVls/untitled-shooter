@@ -6,10 +6,11 @@ public class Player : MonoBehaviour
 {
     public float speed;
     public int health = 10;
-    Rigidbody2D rb;
-    Animator animator;
-    SpriteRenderer sr;
-    Vector2 moveVelocity;
+
+    private Rigidbody2D rb;
+    private Animator animator;
+    private SpriteRenderer sr;
+    private Vector2 moveVelocity;
 
     void Start()
     {        
