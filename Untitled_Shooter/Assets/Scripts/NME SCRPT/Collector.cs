@@ -27,35 +27,31 @@ public class Collector : Enemy
     {
         if (!playerTransform) return;
 
+        HandleMovement();
+        HandleAttack();
+    }
+
+    void HandleMovement()
+    {
         Vector3 playerPos = playerTransform.position;
         bool farFromPlayer = Vector2.Distance(transform.position, playerPos) <= stoppingDistance;
         bool withinRetreat = Vector2.Distance(transform.position, playerPos) <= retreatDistance;
 
-        // 3 different checks to act on player position
-        if (!farFromPlayer)
-        {
-            //Get closer to player
-            ChasePlayer(playerPos);
-        }
-        else if (farFromPlayer && !withinRetreat)
-        {
-            //No movement
-            transform.position = this.transform.position;
-        }
-        else if (withinRetreat)
-        {
-            //retreat from player
-            transform.position = Vector2.MoveTowards(transform.position, playerPos, -speed * Time.deltaTime);
-        }
+        // this is equivalent to not moving
+        if (farFromPlayer && !withinRetreat) return;
+        if (!farFromPlayer) ChasePlayer();
+        if (withinRetreat) RetreatFromPlayer();
+    }
 
-        if (timeBetweenAttack <= 0)
-        {
-            Instantiate(limb, transform.position, Quaternion.identity);
-            timeBetweenAttack = startTimeBetweenAttack;
-        }
-        else 
+    void HandleAttack()
+    {
+        if (timeBetweenAttack > 0) 
         {
             timeBetweenAttack -= Time.deltaTime;
+            return;
         }
+
+        Instantiate(limb, transform.position, Quaternion.identity);
+        timeBetweenAttack = startTimeBetweenAttack;
     }
 }

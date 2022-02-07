@@ -36,7 +36,7 @@ public class Enemy : MonoBehaviour
         if (health <= 0) Destroy(gameObject);
 
         Vector3 playerPos = playerTransform.position;
-        ChasePlayer(playerPos);
+        ChasePlayer();
     }
 
     public void TakeDamage(int damage)
@@ -61,8 +61,20 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public void ChasePlayer(Vector3 playerPosition)
+    public void ChasePlayer()
     {
-        transform.position = Vector2.MoveTowards(transform.position, playerPosition, speed * Time.deltaTime);
+        transform.position = Vector2.MoveTowards(
+            transform.position, 
+            playerTransform.position, 
+            speed * Time.deltaTime);
+    }
+
+    public void RetreatFromPlayer()
+    {
+        transform.position = Vector2.MoveTowards(
+            transform.position,
+            playerTransform.position,
+            -speed * Time.deltaTime
+        );
     }
 }
