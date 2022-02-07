@@ -8,7 +8,7 @@ public class Spawner : MonoBehaviour
     public float timeBetweenSpawns;
     public int numberOfEnemies = 10;
 
-    public List<GameObject> enemyTypes;
+    public GameObject[] enemyTypes;
     List<Transform> spawnSpots = new();
     List<Enemy> enemyScripts = new();
     List<GameObject> enemies = new();
@@ -69,6 +69,6 @@ public class Spawner : MonoBehaviour
             if (randomPoint < sw) return i;
             else randomPoint = sw;
         }
-        return enemyTypes.Count - 1;
+        return enemyTypes.Length - 1;
     }
 }
