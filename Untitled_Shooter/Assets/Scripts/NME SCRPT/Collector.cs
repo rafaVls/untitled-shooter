@@ -35,7 +35,7 @@ public class Collector : Enemy
         if (!farFromPlayer)
         {
             //Get closer to player
-            transform.position = Vector2.MoveTowards(transform.position, playerPos, speed * Time.deltaTime);
+            ChasePlayer(playerPos);
         }
         else if (farFromPlayer && !withinRetreat)
         {

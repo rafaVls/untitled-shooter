@@ -36,7 +36,7 @@ public class Enemy : MonoBehaviour
         if (health <= 0) Destroy(gameObject);
 
         Vector3 playerPos = playerTransform.position;
-        transform.position = Vector2.MoveTowards(transform.position, playerPos, speed * Time.deltaTime);
+        ChasePlayer(playerPos);
     }
 
     public void TakeDamage(int damage)
@@ -59,5 +59,10 @@ public class Enemy : MonoBehaviour
             Destroy(other.gameObject); // this belongs in bullet.cs I think
             Destroy(gameObject);
         }
+    }
+
+    public void ChasePlayer(Vector3 playerPosition)
+    {
+        transform.position = Vector2.MoveTowards(transform.position, playerPosition, speed * Time.deltaTime);
     }
 }
