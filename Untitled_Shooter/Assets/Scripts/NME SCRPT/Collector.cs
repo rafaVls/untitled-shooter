@@ -26,21 +26,23 @@ public class Collector : Enemy
     void Update()
     {
         if (!playerTransform) return;
+
         Vector3 playerPos = playerTransform.position;
+        bool farFromPlayer = Vector2.Distance(transform.position, playerPos) <= stoppingDistance;
+        bool withinRetreat = Vector2.Distance(transform.position, playerPos) <= retreatDistance;
 
         // 3 different checks to act on player position
-        // gotta clean these up later
-        if (Vector2.Distance(transform.position, playerPos) > stoppingDistance)
+        if (!farFromPlayer)
         {
             //Get closer to player
             transform.position = Vector2.MoveTowards(transform.position, playerPos, speed * Time.deltaTime);
         }
-        else if (Vector2.Distance(transform.position, playerPos) < stoppingDistance && Vector2.Distance(transform.position, playerPos) > retreatDistance)
+        else if (farFromPlayer && !withinRetreat)
         {
             //No movement
             transform.position = this.transform.position;
         }
-        else if (Vector2.Distance(transform.position, playerPos) < retreatDistance)
+        else if (withinRetreat)
         {
             //retreat from player
             transform.position = Vector2.MoveTowards(transform.position, playerPos, -speed * Time.deltaTime);
