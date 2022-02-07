@@ -61,10 +61,10 @@ public class Spawner : MonoBehaviour
 
         for (int i = 0; i < enemyList.Count; i++)
         {
-            float sw = enemyScripts[i].spawnChance;
+            float sc = enemyScripts[i].spawnChance;
 
-            if (randomPoint < sw) return i;
-            else randomPoint = sw;
+            if (randomPoint < sc) return i;
+            else randomPoint = sc;
         }
         return enemyTypes.Length - 1;
     }
