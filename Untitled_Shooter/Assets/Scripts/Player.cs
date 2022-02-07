@@ -11,20 +11,11 @@ public class Player : MonoBehaviour
     SpriteRenderer sr;
     Vector2 moveVelocity;
 
-    // Variables for possible dash mechanic code in Update()
-    private float activeSpeed;
-    public float dashSpeed;
-    public float dashLength = .5f, dashCooldown = 1f;
-    private float dashCounter;
-    private float dashCooldownCounter;
-
     void Start()
     {        
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
-
-        activeSpeed = speed;
     }
 
     void Update()
@@ -32,41 +23,11 @@ public class Player : MonoBehaviour
         Vector2 moveInput = getMoveInput();
         moveVelocity = moveInput.normalized * speed;
 
-        // I have tried over (i kid you not) dozen different iterations of a dash mechanic
-        // This is the only code I've gotten to work that SOMEWHAT resembles a dash
-        // ...except it's more like a teleport, but this is what I have for now
         // "Dash" mechanic still needs: Smoother transition, cooldown, and particle/sprite effect
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             rb.AddForce(moveInput.normalized * 10000);
         }
-
-        // Possible dash script, but non-functioning, needs tinkering, otherwise, scrap
-
-        // if (Input.GetKeyDown(KeyCode.LeftShift))
-        // {
-        //     if (dashCooldownCounter <=0 && dashCounter <= 0)
-        //     {
-        //         activeSpeed = dashSpeed;
-        //         dashCounter = dashLength;
-        //     }
-        // }
-
-        // if (dashCounter > 0)
-        // {
-        //     dashCounter -= Time.deltaTime;
-
-        //     if (dashCounter <= 0)
-        //     {
-        //         activeSpeed = speed;
-        //         dashCooldownCounter = dashCooldown;
-        //     }
-        // }
-
-        // if (dashCooldownCounter > 0)
-        // {
-        //     dashCooldownCounter -= Time.deltaTime;
-        // }
 
         triggerRunAnimation(moveInput.x, moveInput.y);
         flipSprite(moveInput.x);
