@@ -6,9 +6,8 @@ public class Collector : Enemy
 {
     public float stoppingDistance;
     public float retreatDistance;
-
-    private float timeBetweenAttack;
     public float startTimeBetweenAttack;
+    private float timeBetweenAttack;
 
     public GameObject limb;
 
@@ -26,6 +25,7 @@ public class Collector : Enemy
 
     void Update()
     {
+        if (!playerTransform) return;
         Vector3 playerPos = playerTransform.position;
 
         // 3 different checks to act on player position
