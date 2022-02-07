@@ -20,7 +20,7 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        Vector2 moveInput = getMoveInput();
+        Vector2 moveInput = GetMoveInput();
         moveVelocity = moveInput.normalized * speed;
 
         // "Dash" mechanic still needs: Smoother transition, cooldown, and particle/sprite effect
@@ -29,8 +29,8 @@ public class Player : MonoBehaviour
             rb.AddForce(moveInput.normalized * 10000);
         }
 
-        triggerRunAnimation(moveInput.x, moveInput.y);
-        flipSprite(moveInput.x);
+        TriggerRunAnimation(moveInput.x, moveInput.y);
+        FlipSprite(moveInput.x);
     }
 
     void FixedUpdate() 
@@ -38,7 +38,7 @@ public class Player : MonoBehaviour
         rb.MovePosition(rb.position + moveVelocity * Time.fixedDeltaTime);
     }
 
-    Vector2 getMoveInput()
+    Vector2 GetMoveInput()
     {
         float x = Input.GetAxisRaw("Horizontal");
         float y = Input.GetAxisRaw("Vertical");
@@ -46,7 +46,7 @@ public class Player : MonoBehaviour
         return new Vector2(x, y);
     }
 
-    void triggerRunAnimation(float hor, float vert)
+    void TriggerRunAnimation(float hor, float vert)
     {
         float playerDir = hor == 0 ? vert : hor;
         animator.SetFloat("Speed", Mathf.Abs(playerDir * speed));
@@ -54,7 +54,7 @@ public class Player : MonoBehaviour
 
     // investigate if this function can be simplified, I don't like if elses
     // if elses are a part of the c# lifestyle baby
-    void flipSprite(float horizontalDir)
+    void FlipSprite(float horizontalDir)
     {
         if (horizontalDir > 0) 
         {
